@@ -29,8 +29,11 @@ public class FormationController : MonoBehaviour {
 		// check if we need to flip direction
 		float formationLeftEdge = transform.position.x - 0.5f * width;
 		float formationRightEdge = transform.position.x + 0.5f * width;
-		if (formationRightEdge > boundaryRightEdge || formationLeftEdge < boundaryLeftEdge) {
-			direction *= -1;
+		if (formationRightEdge > boundaryRightEdge) {
+			direction = -1;
+		}
+		else if (formationLeftEdge < boundaryLeftEdge) {
+			direction = 1;
 		}
 
 		// move the position

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed = 10.0f;
+	public GameObject laser;
 
 	private float xmin;
 	private float xmax;
@@ -15,13 +16,16 @@ public class PlayerController : MonoBehaviour {
 		Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
 		Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
 		float padding = GetComponent<Renderer>().bounds.size.x / 2.0f;
-		Debug.Log(padding);
 		xmin = leftmost.x + padding;
 		xmax = rightmost.x - padding;
 	}
 	
 	// Update is called once per frame
 	void Update() {
+		if (Input.GetKey(KeyCode.Space)) {
+			GameObject laserIns = Instantiate(laser, transform.position, Quaternion.identity);
+			laserIns.transform.Translate(new Vector3(0f, 0.4f));
+		}
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			transform.position += new Vector3(-speed * Time.deltaTime, 0f);
 		} else if (Input.GetKey(KeyCode.RightArrow)) {
